@@ -1,41 +1,40 @@
-import { randomUUID } from "crypto"
+import { randomUUID } from 'crypto';
 
 export type UserProps = {
-  name: string
-  surname: string
-  email: string
-  password: string
-}
+  name: string;
+  surname: string;
+  email: string;
+  password: string;
+};
 
 export class User {
-
-  public readonly id: string
-  public props: Required<UserProps>
+  public readonly id: string;
+  public props: Required<UserProps>;
 
   private constructor(props: UserProps, id?: string) {
-      this.id = id || randomUUID()
-      this.props = {
-        ...props
-      }
+    this.id = id || randomUUID();
+    this.props = {
+      ...props,
+    };
   }
 
   static create(props: UserProps, id?: string): User {
-    return new User(props, id)
+    return new User(props, id);
   }
 
-  toJSON(){
+  toJSON() {
     return {
       id: this.id,
-      ...this.props
-    }
+      ...this.props,
+    };
   }
 
   validatePassword(password: string) {
-    if(password.length < 8) {
-      throw new Error('Password must be greater than 8 digits!')
+    if (password.length < 8) {
+      throw new Error('Password must be greater than 8 digits!');
     }
 
-    return true
+    return true;
   }
 
   updateName(name: string) {
@@ -85,5 +84,4 @@ export class User {
   private set password(value: string) {
     this.props.password = value;
   }
-
 }

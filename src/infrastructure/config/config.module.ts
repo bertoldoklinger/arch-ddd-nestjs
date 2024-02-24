@@ -11,13 +11,13 @@ import { ThrottlerModule } from '@nestjs/throttler';
     ThrottlerModule.forRootAsync({
       inject: [ConfigService],
       imports: [ConfigModule],
-      useFactory: (config:ConfigService) => [
+      useFactory: (config: ConfigService) => [
         {
           ttl: config.get<number>('THROTTLE_TTL'),
-          limit: config.get<number>('THROTTLE_LIMIT')
-        }
-      ]
-    })
+          limit: config.get<number>('THROTTLE_LIMIT'),
+        },
+      ],
+    }),
   ],
 })
 export class ConfigModule {}
